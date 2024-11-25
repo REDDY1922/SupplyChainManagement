@@ -5,8 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.SupplyChainManagement.Exception.ProductNotFoundException;
@@ -32,6 +34,11 @@ public class WarehouseController {
 			// TODO Auto-generated catch block
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		
+	}
+	@PutMapping("/updateStock")
+	public String updateStock(@RequestParam String ProductName,@RequestParam int quantity) {
+		warehouseService.addStock(ProductName,quantity);
+		return "Stock Updated Successfully";
 	}
 }
+

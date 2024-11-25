@@ -32,6 +32,25 @@ public class WarehouseService {
             productRepository.save(product);
         }
 	}
+	public boolean checkAndReduceStock(String productName, int quantity) {
+        Product product = productRepository.findByProductName(productName);
+        if (product == null || product.getQuantity() < quantity) {
+            return false; // Product not available or insufficient stock
+        }
+        
+        // Reduce stock quantity
+        product.setQuantity(product.getQuantity() - quantity);
+        productRepository.save(product);
+        return true;
+    }
+	public boolean checkStock(String productName, int quantity) {
+		// TODO Auto-generated method stub
+		Product product = productRepository.findByProductName(productName);
+        if (product == null || product.getQuantity() < quantity) {
+            return false; // Insufficient stock
+        }
+        return true;
+    }
+	}
 	
 
-}
