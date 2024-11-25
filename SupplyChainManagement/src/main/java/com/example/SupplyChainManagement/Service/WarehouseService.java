@@ -33,7 +33,7 @@ public class WarehouseService {
         }
 	}
 	public boolean checkAndReduceStock(String productName, int quantity) {
-        Product product = productRepository.findByProductName(productName);
+        Product product = productRepository.findByname(productName);
         if (product == null || product.getQuantity() < quantity) {
             return false; // Product not available or insufficient stock
         }
@@ -45,7 +45,7 @@ public class WarehouseService {
     }
 	public boolean checkStock(String productName, int quantity) {
 		// TODO Auto-generated method stub
-		Product product = productRepository.findByProductName(productName);
+		Product product = productRepository.findByname(productName);
         if (product == null || product.getQuantity() < quantity) {
             return false; // Insufficient stock
         }
