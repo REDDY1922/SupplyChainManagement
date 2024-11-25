@@ -36,9 +36,19 @@ public class WarehouseController {
 		}
 	}
 	@PutMapping("/updateStock")
-	public String updateStock(@RequestParam String ProductName,@RequestParam int quantity) {
-		warehouseService.addStock(ProductName,quantity);
-		return "Stock Updated Successfully";
-	}
+    public ResponseEntity<String> updateStock(
+            @RequestParam(required = true) String name,
+            @RequestParam(required = true) int quantity) {
+        if (quantity <= 0) {
+            return ResponseEntity.badRequest().body("Quantity must be greater than 0.");
+        }
+
+        try {
+            warehouseService.addStock(name, quantity);
+            return ResponseEntity.ok("Stock Updated Successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
 

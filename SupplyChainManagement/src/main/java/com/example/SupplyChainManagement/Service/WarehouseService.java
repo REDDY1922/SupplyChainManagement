@@ -24,16 +24,16 @@ public class WarehouseService {
 		return optional.get();
 	}
 	
-	public void addStock(String productName, int quantity) {
+	public void addStock(String name, int quantity) {
 		// TODO Auto-generated method stub
-		Product product=productRepository.findByname(productName);
+		Product product=productRepository.findByname(name);
 		if (product != null) {
             product.setQuantity(product.getQuantity() + quantity);
             productRepository.save(product);
         }
 	}
-	public boolean checkAndReduceStock(String productName, int quantity) {
-        Product product = productRepository.findByname(productName);
+	public boolean checkAndReduceStock(String name, int quantity) {
+        Product product = productRepository.findByname(name);
         if (product == null || product.getQuantity() < quantity) {
             return false; // Product not available or insufficient stock
         }
@@ -43,9 +43,9 @@ public class WarehouseService {
         productRepository.save(product);
         return true;
     }
-	public boolean checkStock(String productName, int quantity) {
+	public boolean checkStock(String name, int quantity) {
 		// TODO Auto-generated method stub
-		Product product = productRepository.findByname(productName);
+		Product product = productRepository.findByname(name);
         if (product == null || product.getQuantity() < quantity) {
             return false; // Insufficient stock
         }
