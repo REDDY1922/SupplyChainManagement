@@ -24,5 +24,14 @@ public class WarehouseService {
 		return optional.get();
 	}
 	
+	public void addStock(String productName, int quantity) {
+		// TODO Auto-generated method stub
+		Product product=productRepository.findByname(productName);
+		if (product != null) {
+            product.setQuantity(product.getQuantity() + quantity);
+            productRepository.save(product);
+        }
+	}
+	
 
 }
