@@ -1,5 +1,7 @@
 package com.example.SupplyChainManagement.Service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,11 @@ public class OrdersService {
         order.setQuantity(quantity);
 		order.setStatus(isStockAvailable ? "Confirmed" : "Out of Stock");
         return ordersRepository.save(order);
+	}
+	public Orders getOrderStatus(int id) {
+		// TODO Auto-generated method stub
+		Optional<Orders> optionalOrder = ordersRepository.findById(id);
+        return optionalOrder.orElse(null);
 	}
 	
 }
